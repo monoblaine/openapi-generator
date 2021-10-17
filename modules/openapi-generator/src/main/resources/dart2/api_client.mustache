@@ -157,10 +157,7 @@ class ApiClient {
     // Remove all spaces. Necessary for regular expressions as well.
     targetType = targetType.replaceAll(' ', ''); // ignore: parameter_assignments
 
-    // If the expected target type is String, nothing to do...
-    return targetType == 'String'
-      ? json
-      : _deserialize(jsonDecode(json), targetType, growable: growable == true);
+    return _deserialize(jsonDecode(json), targetType, growable: growable == true);
   }
 {{/native_serialization}}
 
@@ -270,14 +267,11 @@ Future<dynamic> deserializeAsync(DeserializationMessage message) async {
   // Remove all spaces. Necessary for regular expressions as well.
   final targetType = message.targetType.replaceAll(' ', '');
 
-  // If the expected target type is String, nothing to do...
-  return targetType == 'String'
-    ? message.json
-    : ApiClient._deserialize(
-        jsonDecode(message.json),
-        targetType,
-        growable: message.growable == true,
-      );
+  return ApiClient._deserialize(
+    jsonDecode(message.json),
+    targetType,
+    growable: message.growable == true,
+  );
 }
 {{/native_serialization}}
 
