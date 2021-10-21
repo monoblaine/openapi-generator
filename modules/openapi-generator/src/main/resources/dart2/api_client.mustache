@@ -1,6 +1,8 @@
 {{>header}}
 {{>part_of}}
 class ApiClient {
+  static bool isDebug = false;
+
   ApiClient({this.basePath = '{{{basePath}}}'}) {
   {{#hasAuthMethods}}
     // Setup authentications (key: authentication name, value: authentication).
@@ -83,6 +85,10 @@ class ApiClient {
     final queryString = urlEncodedQueryParams.isNotEmpty
       ? '?${urlEncodedQueryParams.join('&')}'
       : '';
+
+    if (ApiClient.isDebug) {
+      print('Sending request: $path$queryString');
+    }
 
     final Uri uri = Uri.parse('$basePath$path$queryString');
 
