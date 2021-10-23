@@ -87,7 +87,7 @@ class ApiClient {
       : '';
 
     if (ApiClient.isDebug) {
-      print('Sending request: $path$queryString');
+      print('Sending $method request: $path$queryString');
     }
 
     final Uri uri = Uri.parse('$basePath$path$queryString');
